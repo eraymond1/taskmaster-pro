@@ -154,19 +154,24 @@ $(".card .list-group").sortable({
   helper: "clone",
 
   activate: function(event) {
-    console.log("activate", this);
+    $(this).addClass("dropover");
+    //console.log("activate", this);
   },
 
   deactive: function(event) {
-    console.log("deactivate", this);
+
+    $(this).removeClass("dropover");
+    //console.log("deactivate", this);
   },
 
   over: function(event) {
-    console.log("over", event.target);
+    $(event.target).addClass("dropover-active");
+    //console.log("over", event.target);
   },
 
   out: function(event) {
-    console.log("out", event.target);
+    $(event.target).removeClass("dropover-active");
+    //console.log("out", event.target);
   },
 
   update: function(event) {
@@ -247,7 +252,8 @@ var auditTask = function(taskEl) {
   }
 
   // this should print out an object for the value of the date variable, but at 5:00pm of that date
-  console.log(time);
+ // console.log(time);
+  //console.log(taskEl);
 };
 
 
@@ -300,4 +306,12 @@ $("#remove-tasks").on("click", function() {
 // load tasks for the first time
 loadTasks();
 
+setInterval(function() {
 
+  $(".card .list-group-item").each(function(index, el) {
+    auditTask(el);
+  });
+
+  
+
+}, (1000 * 60) * 30);
